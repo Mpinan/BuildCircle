@@ -28,6 +28,7 @@ class App extends Component {
   }
   
   handleSubmit() {
+    console.log(this.state)
     this.addMessageToWindow(this.state.message)
   }
 
@@ -40,8 +41,16 @@ class App extends Component {
             onChange={this.onChange.bind(this)}
             type="text"
             name="message"
+            // value={message}
+            onKeyPress={e => {
+              console.log(e.key)
+              if (e.key !== 'Enter') return;
+              this.handleSubmit()
+            }}
           />
-          <button onClick={this.handleSubmit.bind(this)} >
+          <button 
+            onClick={this.handleSubmit.bind(this)} 
+          >
             Send
           </button>
         </div>
