@@ -37,8 +37,6 @@ function Chat() {
       setChannel(event.target.innerText)
     }
 
-
-  
     return (
       <div>
         <div >
