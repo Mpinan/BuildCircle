@@ -2,22 +2,42 @@ import React, { useState, useEffect } from 'react';
 import { usePubNub } from 'pubnub-react';
 import ChatForm from "./chatForm"
 import "./chat.css" 
+// import Picture from "./picture.png"
 
 function Chat() {
     const pubnub = usePubNub();
     const [channels] = useState(['channel-1', 'channel-2', 'channel-3', 'channel-4']);
-    const [messages, addMessage] = useState([]);
+    const [messages, addMessage] = useState({
+      'channel-1': [], 
+      'channel-2': [], 
+      'channel-3': [], 
+      'channel-4': []
+    });
     const [message, setMessage] = useState('');
     const [channel, setChannel] = useState("channel-1")
+
+    // const [files, setFile] = useState([])
+    // const [username, setUsername] = useState("")
   
     const handleMessage = event => {
       const message = event.message;
       console.log(event)
       console.log(message, "i am a message")
-      // if (typeof message === 'string' || message.hasOwnProperty('text')) {
-        // const text = message.text || message;
-        addMessage(messages => [...messages, message]);
-      // }
+      if (typeof message === 'string' || message.hasOwnProperty('text')) {
+        const text = message.text || message;
+        if(event.channel === "channel-1") {
+          addMessage(messages => ({...messages,  "channel-1": [...messages["channel-1"], text]}));
+        }
+        if(event.channel === "channel-2") {
+          addMessage(messages => ({...messages,  "channel-2": [...messages["channel-2"], text]}));
+        }
+        if(event.channel === "channel-3") {
+          addMessage(messages => ({...messages,  "channel-3": [...messages["channel-3"], text]}));
+        }
+        if(event.channel === "channel-4") {
+          addMessage(messages => ({...messages,  "channel-4": [...messages["channel-4"], text]}));
+        }
+      }
     };
   
     const sendMessage = message => {
@@ -27,9 +47,32 @@ function Chat() {
           .then(() => setMessage(''));
       }
     };
+
+    // const sendFile = file => {
+    //   if (file) {
+    //     pubnub.sendFile({
+    //       channel: 'my_channel',
+    //       message: {
+    //         test: "message",
+    //         value: 42
+    //       },
+    //       file: {
+    //         uri: file,
+    //         name: 'picture.png',
+    //         mimeType: 'image/png',
+    //       }
+    //     })
+    //   }
+    // }
+
+    // const handleFile = (event) => {
+    //   console.log(event.value)
+    //   let file = event.value
+    //   setFile(files => [...files, file]);
+    // }
   
     useEffect(() => {
-      pubnub.addListener({ message: handleMessage });
+      pubnub.addListener({ message: handleMessage  });
       pubnub.subscribe({ channels });
     }, [pubnub, channels]);
 
@@ -45,17 +88,16 @@ function Chat() {
             {channels.map((cha, index) => {
               return (
                 <div key={index}>
-                  <td>
                     <button onClick={handleChannel}>
                       {cha}
                     </button>
-                  </td>
                 </div>
               );
             })}
           </div>
           <div style={listStyles}>
-            {messages.map((message, index) => {
+            {console.log(messages["channel-2"])}
+            {messages[channel].map((message, index) => {
               return (
                 <div key={`message-${index}`}>
                   {message}
@@ -63,6 +105,11 @@ function Chat() {
               );
             })}
           </div>
+          {/* <input
+            type="file"
+            value={files}
+            onChange={e => {sendFile(e.target)}}
+          /> */}
           <div>
             <ChatForm
               message={message}
