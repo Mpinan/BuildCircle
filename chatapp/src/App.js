@@ -1,71 +1,21 @@
-import React, { Component } from "react";
 import PubNub from 'pubnub';
-import { PubNubProvider, usePubNub } from 'pubnub-react';
+import { PubNubProvider } from 'pubnub-react';
+import Chat from "./components/chat"
+// require('dotenv').config()
 
-
-// Create a new instance of PubNub to set it up with personalized keys
 const pubnub = new PubNub({
   publishKey: 'pub-c-22ec4f77-ccd2-4814-8829-ef38cedbad62',
-  subscribeKey: 'pub-c-22ec4f77-ccd2-4814-8829-ef38cedbad62',
-  uuid: 'Mario'
+  subscribeKey: 'sub-c-14b19f88-6f6f-11eb-a2ab-226faaaba132',
+  uuid: 'myUUID' 
 });
 
-class App extends Component {
-  state = {
-    message: "",
-    messages: []
-  }
-
-
-  onChange(e) {
-    this.setState({[e.target.name]: e.target.value})
-  }
-  
-  addMessageToWindow(message){
-    let messages = [...this.state.messages]
-    messages.push(message)
-    this.setState( {messages } )
-  }
-  
-  handleSubmit() {
-    console.log(this.state)
-    this.addMessageToWindow(this.state.message)
-  }
-
-  render() {
-    const {messages} = this.state
-    return (
-      <PubNubProvider client={pubnub}>
-        <div>
-          <input
-            onChange={this.onChange.bind(this)}
-            type="text"
-            name="message"
-            // value={message}
-            onKeyPress={e => {
-              console.log(e.key)
-              if (e.key !== 'Enter') return;
-              this.handleSubmit()
-            }}
-          />
-          <button 
-            onClick={this.handleSubmit.bind(this)} 
-          >
-            Send
-          </button>
-        </div>
-        <div>
-          {messages.map((message, index) => {
-            return (
-              <div key={`message-${index}`}>
-                {message}
-              </div>
-            );
-          })}
-        </div>
-      </PubNubProvider>
-    );
-  }
+function App() {
+  return (
+    <PubNubProvider client={pubnub}>
+      <Chat />
+    </PubNubProvider>
+  );
 }
+
 
 export default App;
