@@ -11,9 +11,9 @@ const pubnub = new PubNub({
 
 function App() {
   return (
-    <PubNubProvider client={pubnub}>
-      <Chat />
-    </PubNubProvider>
+      <PubNubProvider client={pubnub}>
+        <Chat />
+      </PubNubProvider>
   );
 }
 
