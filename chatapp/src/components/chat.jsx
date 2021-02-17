@@ -4,6 +4,7 @@ import ChatForm from "./chatForm"
 import "./chat.css" 
 // import Picture from "./picture.png"
 
+
 function Chat() {
     const pubnub = usePubNub();
     const [channels] = useState(['channel-1', 'channel-2', 'channel-3', 'channel-4']);
@@ -16,26 +17,13 @@ function Chat() {
     const [message, setMessage] = useState('');
     const [channel, setChannel] = useState("channel-1")
 
-    // const [files, setFile] = useState([])
-    // const [username, setUsername] = useState("")
   
-    const handleMessage = event => {
+    const handleMessage = (event) => {
       const message = event.message;
-      console.log(event)
-      console.log(message, "i am a message")
       if (typeof message === 'string' || message.hasOwnProperty('text')) {
         const text = message.text || message;
-        if(event.channel === "channel-1") {
-          addMessage(messages => ({...messages,  "channel-1": [...messages["channel-1"], text]}));
-        }
-        if(event.channel === "channel-2") {
-          addMessage(messages => ({...messages,  "channel-2": [...messages["channel-2"], text]}));
-        }
-        if(event.channel === "channel-3") {
-          addMessage(messages => ({...messages,  "channel-3": [...messages["channel-3"], text]}));
-        }
-        if(event.channel === "channel-4") {
-          addMessage(messages => ({...messages,  "channel-4": [...messages["channel-4"], text]}));
+        if(event.channel) {
+          addMessage(messages => ({...messages,  [event.channel]: [...messages[event.channel], text]}));
         }
       }
     };
@@ -47,30 +35,7 @@ function Chat() {
           .then(() => setMessage(''));
       }
     };
-
-    // const sendFile = file => {
-    //   if (file) {
-    //     pubnub.sendFile({
-    //       channel: 'my_channel',
-    //       message: {
-    //         test: "message",
-    //         value: 42
-    //       },
-    //       file: {
-    //         uri: file,
-    //         name: 'picture.png',
-    //         mimeType: 'image/png',
-    //       }
-    //     })
-    //   }
-    // }
-
-    // const handleFile = (event) => {
-    //   console.log(event.value)
-    //   let file = event.value
-    //   setFile(files => [...files, file]);
-    // }
-  
+ 
     useEffect(() => {
       pubnub.addListener({ message: handleMessage  });
       pubnub.subscribe({ channels });
@@ -105,6 +70,10 @@ function Chat() {
               );
             })}
           </div>
+					{/* <div>
+      			<Picker 
+							onEmojiClick={onEmojiClick} />
+    			</div> */}
           {/* <input
             type="file"
             value={files}

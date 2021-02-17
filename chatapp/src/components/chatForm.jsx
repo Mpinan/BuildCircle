@@ -1,8 +1,22 @@
+import Picker from 'emoji-picker-react';
+
 const ChatForm = (props) => {
 	const { message, sendMessage, setMessageForm } = props
+	// const [currentMessage, setEmoji] = useState("")
+	
+
+	const onEmojiClick = (e, emojiObject) => {
+		console.log(document.getElementById("text").value)
+		document.getElementById("text").value += emojiObject.emoji
+	};
     return (       
         <div style={footerStyles}>
+					<div>
+      			<Picker 
+							onEmojiClick={onEmojiClick} />
+    			</div>
           <input
+							id="text"
 							style={inputStyles}
               type="text"
               placeholder="Type your message"
