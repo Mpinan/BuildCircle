@@ -1,20 +1,28 @@
 import Picker from 'emoji-picker-react';
+import React, { useState } from 'react';
+
 
 const ChatForm = (props) => {
 	const { message, sendMessage, setMessageForm } = props
-	// const [currentMessage, setEmoji] = useState("")
-	
+  const [hidden, setHidden] = useState(false)
 
+  const showEmojis = () => {
+    setHidden(!hidden)
+  }
+	
 	const onEmojiClick = (e, emojiObject) => {
-		console.log(document.getElementById("text").value)
+
 		document.getElementById("text").value += emojiObject.emoji
 	};
-    return (       
+    return (     
+      <div>
         <div style={footerStyles}>
-					<div>
-      			<Picker 
-							onEmojiClick={onEmojiClick} />
-    			</div>
+          <button onClick={showEmojis}>
+            Emojis
+          </button>
+          <div>
+            {hidden ? <Picker onEmojiClick={onEmojiClick} /> : null }
+          </div>
           <input
 							id="text"
 							style={inputStyles}
@@ -22,21 +30,23 @@ const ChatForm = (props) => {
               placeholder="Type your message"
               value={message}
               onKeyPress={e => {
-                  if (e.key !== 'Enter') return;
-                  sendMessage(message);
+                if (e.key !== 'Enter') return;
+                sendMessage(message);
               }}
               onChange={e => setMessageForm(e.target.value)}
               />
           <button
 							style={buttonStyles}
               onClick={e => {
-                  e.preventDefault();
-                  sendMessage(message);
+                e.preventDefault();
+                sendMessage(message);
               }}
               >
             Send Message
           </button> 
+
         </div>      
+      </div>  
     );
 }
 

@@ -1,24 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import { usePubNub } from 'pubnub-react';
 import ChatForm from "./chatForm"
-import "./chat.css" 
-// import Picture from "./picture.png"
 
 
 function Chat() {
     const pubnub = usePubNub();
-    const [channels] = useState(['channel-1', 'channel-2', 'channel-3', 'channel-4']);
+    const [channels, setChannels] = useState(['channel-1', 'channel-2', 'channel-3', 'channel-4']);
     const [messages, addMessage] = useState({
       'channel-1': [], 
       'channel-2': [], 
       'channel-3': [], 
-      'channel-4': []
+      'channel-4': [],
+      'channel-5': [],
+      'channel-6': [],
     });
+
     const [message, setMessage] = useState('');
     const [channel, setChannel] = useState("channel-1")
+    const [newChannel, createNewChannel] = useState("")
 
   
     const handleMessage = (event) => {
+      console.log(event)
       const message = event.message;
       if (typeof message === 'string' || message.hasOwnProperty('text')) {
         const text = message.text || message;
@@ -35,6 +38,10 @@ function Chat() {
           .then(() => setMessage(''));
       }
     };
+
+    const createChannel = (channel) => {
+      setChannels([...channels, channel])
+    }
  
     useEffect(() => {
       pubnub.addListener({ message: handleMessage  });
@@ -49,6 +56,25 @@ function Chat() {
     return (
       <div style={pageStyles}>
         <div style={chatStyles}>
+          <div>
+            <input
+              type="text"
+              placeholder="Type your channel"
+              value={newChannel}
+              onKeyPress={e => {
+                  if (e.key !== 'Enter') return;
+                  createChannel(newChannel);
+              }}
+              onChange={e => createNewChannel(e.target.value)}
+            >
+            </input>
+            <button onClick={e => {
+              e.preventDefault();
+              createChannel(newChannel)
+            }}>
+              Create
+            </button>
+          </div>
           <div style={channelStyle}>
             {channels.map((cha, index) => {
               return (
@@ -70,15 +96,6 @@ function Chat() {
               );
             })}
           </div>
-					{/* <div>
-      			<Picker 
-							onEmojiClick={onEmojiClick} />
-    			</div> */}
-          {/* <input
-            type="file"
-            value={files}
-            onChange={e => {sendFile(e.target)}}
-          /> */}
           <div>
             <ChatForm
               message={message}
