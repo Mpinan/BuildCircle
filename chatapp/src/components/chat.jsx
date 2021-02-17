@@ -5,7 +5,7 @@ import ChatForm from "./chatForm"
 
 function Chat() {
     const pubnub = usePubNub();
-    const [channels, setChannels] = useState(['channel-1']);
+    const [channels, setChannels] = useState(['channel-1', "channel-2", "channel-3"]);
     const [messages, addMessage] = useState({
       'channel-1': [], 
       'channel-2': [], 
@@ -21,7 +21,7 @@ function Chat() {
 
   
     const handleMessage = (event) => {
-      // console.log(event)
+      console.log(event)
       const message = event.message;
       if (typeof message === 'string' || message.hasOwnProperty('text')) {
         const text = message.text || message;
@@ -87,7 +87,6 @@ function Chat() {
             })}
           </div>
           <div style={listStyles}>
-            {console.log(messages["channel-2"])}
             {messages[channel].map((message, index) => {
               return (
                 <div key={`message-${index}`}>

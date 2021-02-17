@@ -11,18 +11,18 @@ const ChatForm = (props) => {
   }
 	
 	const onEmojiClick = (e, emojiObject) => {
-
 		document.getElementById("text").value += emojiObject.emoji
 	};
+  
     return (     
-      <div>
+      <section>
+        <div>
+          {hidden ? <Picker onEmojiClick={onEmojiClick} /> : null }
+        </div>
         <div style={footerStyles}>
           <button onClick={showEmojis}>
             Emojis
           </button>
-          <div>
-            {hidden ? <Picker onEmojiClick={onEmojiClick} /> : null }
-          </div>
           <input
 							id="text"
 							style={inputStyles}
@@ -46,7 +46,7 @@ const ChatForm = (props) => {
           </button> 
 
         </div>      
-      </div>  
+      </section>  
     );
 }
 
