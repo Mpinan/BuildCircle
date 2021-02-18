@@ -5,14 +5,17 @@ import React, { useState, useRef } from 'react';
 const ChatForm = (props) => {
 	const { message, sendMessage, setMessageForm } = props
   const [hidden, setHidden] = useState(false)
+  const ref = useRef(null);
 
   const showEmojis = () => {
     setHidden(!hidden)
   }
 
-  const ref = useRef(null);
 
 	const onEmojiClick = (e, emojiObject) => {
+    console.log(ref)
+    console.log(ref.current)
+    console.log(ref.current.selectionStart)
     const cursor = ref.current.selectionStart;
     const text = message.slice(0, cursor) + emojiObject.emoji + message.slice(cursor);
     setMessageForm(text);
