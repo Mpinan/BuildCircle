@@ -22,8 +22,9 @@ function Chat() {
   
     const handleMessage = (event) => {
       console.log(event)
-      const publisher = event.publisher
-      const message = event.message;
+      const time = new Date().toLocaleTimeString();
+      const publisher = <h4>{event.publisher}</h4>
+      const message = event.message + " " + time;
       if (typeof message === 'string' || message.hasOwnProperty('text')) {
         const text = message.text || message;
         if(event.channel) {
