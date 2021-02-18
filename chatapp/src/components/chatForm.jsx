@@ -1,5 +1,5 @@
 import Picker from 'emoji-picker-react';
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 
 
 const ChatForm = (props) => {
@@ -9,9 +9,13 @@ const ChatForm = (props) => {
   const showEmojis = () => {
     setHidden(!hidden)
   }
-	
+
+  const ref = useRef(null);
+
 	const onEmojiClick = (e, emojiObject) => {
-		document.getElementById("text").value += emojiObject.emoji
+    const cursor = ref.current.selectionStart;
+    const text = message.slice(0, cursor) + emojiObject.emoji + message.slice(cursor);
+    setMessageForm(text);
 	};
 
     return (     
@@ -24,6 +28,7 @@ const ChatForm = (props) => {
             Emojis
           </button>
           <input
+              ref={ref}
 							id="text"
 							style={inputStyles}
               type="text"

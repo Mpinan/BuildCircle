@@ -50,7 +50,6 @@ function Chat() {
     return (
       <div style={pageStyles}>
         <div style={chatStyles}>
-
           <h1>You are in {channel}</h1>
           <div style={channelStyle}>
             {channels.map((cha, index) => {
