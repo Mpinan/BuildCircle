@@ -13,9 +13,6 @@ const ChatForm = (props) => {
 
 
 	const onEmojiClick = (e, emojiObject) => {
-    console.log(ref)
-    console.log(ref.current)
-    console.log(ref.current.selectionStart)
     const cursor = ref.current.selectionStart;
     const text = message.slice(0, cursor) + emojiObject.emoji + message.slice(cursor);
     setMessageForm(text);

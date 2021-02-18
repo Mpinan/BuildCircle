@@ -1,7 +1,6 @@
 const NameForm = (props) => {
 	const {name, setName} = props
 
-	
     return (         
     	<div style={pageStyles}>
         <form>
@@ -23,7 +22,8 @@ const NameForm = (props) => {
             Submit name
           </button>
         </form>
-      </div> );
+      </div> 
+    );
 }
 
 const inputStyles = {
