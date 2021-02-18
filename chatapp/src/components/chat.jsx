@@ -22,11 +22,12 @@ function Chat() {
   
     const handleMessage = (event) => {
       console.log(event)
+      const publisher = event.publisher
       const message = event.message;
       if (typeof message === 'string' || message.hasOwnProperty('text')) {
         const text = message.text || message;
         if(event.channel) {
-          addMessage(messages => ({...messages,  [event.channel]: [...messages[event.channel], text]}));
+          addMessage(messages => ({...messages,  [event.channel]: [...messages[event.channel], publisher, text]}));
         }
       }
     };

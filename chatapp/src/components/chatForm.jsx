@@ -13,7 +13,7 @@ const ChatForm = (props) => {
 	const onEmojiClick = (e, emojiObject) => {
 		document.getElementById("text").value += emojiObject.emoji
 	};
-  
+
     return (     
       <section>
         <div>
@@ -44,7 +44,6 @@ const ChatForm = (props) => {
               >
             Send Message
           </button> 
-
         </div>      
       </section>  
     );
