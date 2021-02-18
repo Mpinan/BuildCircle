@@ -6,7 +6,7 @@ import NameForm from "./components/nameForm"
 
 function App() {
   const [name, setName] = useState('');
-
+  console.log(name)
 
   const pubnub = new PubNub({
     publishKey: 'pub-c-22ec4f77-ccd2-4814-8829-ef38cedbad62',
