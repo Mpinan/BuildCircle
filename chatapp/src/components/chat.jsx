@@ -5,23 +5,19 @@ import ChatForm from "./chatForm"
 
 function Chat() {
     const pubnub = usePubNub();
-    const [channels, setChannels] = useState(['channel-1', "channel-2", "channel-3"]);
+    const [channels] = useState(['channel-1', "channel-2", "channel-3", 'channel-4']);
     const [messages, addMessage] = useState({
       'channel-1': [], 
       'channel-2': [], 
       'channel-3': [], 
-      'channel-4': [],
-      'channel-5': [],
-      'channel-6': [],
+      'channel-4': []
     });
 
     const [message, setMessage] = useState('');
     const [channel, setChannel] = useState("channel-1")
-    const [newChannel, createNewChannel] = useState("")
 
   
     const handleMessage = (event) => {
-      console.log(event)
       const time = new Date().toLocaleTimeString();
       const publisher = <h4>{event.publisher}</h4>
       const message = event.message + " " + time;
@@ -40,10 +36,6 @@ function Chat() {
           .then(() => setMessage(''));
       }
     };
-
-    const createChannel = (channel) => {
-      setChannels([...channels, channel])
-    }
  
     useEffect(() => {
       pubnub.addListener({ message: handleMessage  });
@@ -58,30 +50,13 @@ function Chat() {
     return (
       <div style={pageStyles}>
         <div style={chatStyles}>
-          <div>
-            <input
-              type="text"
-              placeholder="Type your channel"
-              value={newChannel}
-              onKeyPress={e => {
-                  if (e.key !== 'Enter') return;
-                  createChannel(newChannel);
-              }}
-              onChange={e => createNewChannel(e.target.value)}
-            >
-            </input>
-            <button onClick={e => {
-              e.preventDefault();
-              createChannel(newChannel)
-            }}>
-              Create
-            </button>
-          </div>
           <div style={channelStyle}>
             {channels.map((cha, index) => {
               return (
                 <div key={index}>
-                    <button onClick={handleChannel}>
+                    <button 
+                      style={buttonStyles}
+                      onClick={handleChannel}>
                       {cha}
                     </button>
                 </div>
@@ -108,6 +83,11 @@ function Chat() {
       </div>
     );
   }
+  
+  const buttonStyles = {
+    fontSize: '1.1rem',
+    padding: '10px 15px',
+  };
 
   const channelStyle = { 
     display: 'inline-flex'
@@ -128,13 +108,6 @@ function Chat() {
     width: '50%',
   };
   
-  const headerStyles = {
-    background: '#323742',
-    color: 'white',
-    fontSize: '1.4rem',
-    padding: '10px 15px',
-  };
-
   const listStyles = {
     alignItems: 'flex-start',
     backgroundColor: 'white',

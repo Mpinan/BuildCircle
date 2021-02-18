@@ -49,6 +49,7 @@ const ChatForm = (props) => {
     );
 }
 
+
 const footerStyles = {
   display: 'flex',
 };
