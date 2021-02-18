@@ -6,7 +6,6 @@ import NameForm from "./components/nameForm"
 
 function App() {
   const [name, setName] = useState('');
-  console.log(name)
 
   const handleName = (name = "Default User") => {
     if(name) {return name}
