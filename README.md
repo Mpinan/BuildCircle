@@ -40,6 +40,6 @@ If  you are reading this you are in the right repository so follow the steps bel
 	-	If this command gives you trouble, you might need to install node.js on your computer: https://nodejs.org/en/download/
 - Now that you are set, you can run the app on the same path:
 	- ```npm start```	
-	- If the browser won't open, you can go manually to your browser and paste to `http://localhost:3000/`
+	- If the browser won't open, you can go manually to your browser and paste it to `http://localhost:3000/`
 - You can also run the tests:
 	- ```npm test```
