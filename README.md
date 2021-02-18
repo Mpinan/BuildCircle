@@ -3,8 +3,8 @@
 I introduce you a tech test give by Build Circle, an small web app where you are able to chat with anyone.
 I have never build a chat and I have never used react with hooks until now. This tech test has given me the opportunity to learn more about react and about how a chat works.
 
-![alt text](https://github.com/jaitone/Cats/raw/master/emptyChat.jpg)
-![alt text](https://github.com/jaitone/Cats/raw/master/chat.jpg)
+![alt text](https://github.com/jaitone/Cats/raw/master/emptyChat.png)
+![alt text](https://github.com/jaitone/Cats/raw/master/chat.png)
 
 ## Tech used / API's 
 - React
