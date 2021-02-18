@@ -35,8 +35,6 @@ If  you are reading this you are in the right repository so follow the steps bel
 	- ```git clone https://github.com/jaitone/BuildCircle.git ```
 - Go to the directory:
 	- ```cd BuildCircle```	
-- And then to the app:
-	- ``` cd chatapp ```
 -	Once inside chat app, install dependecies:
 	-	```npm install```
 	-	If this command gives you trouble, you might need to install node.js on your computer: https://nodejs.org/en/download/
