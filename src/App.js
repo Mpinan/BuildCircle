@@ -2,13 +2,12 @@ import PubNub from 'pubnub';
 import { PubNubProvider } from 'pubnub-react';
 import Chat from "./components/chat"
 import React, { useState } from 'react';
-import NameForm from "./components/nameForm"
 
 function App() {
   const [name, setName] = useState('');
 
   const handleName = (name = "Default User") => {
-    if(name) {return name}
+    if(name) return name
   }
 
   const pubnub = new PubNub({
@@ -20,11 +19,10 @@ function App() {
 
   return (
       <PubNubProvider client={pubnub}>
-        <NameForm
+        <Chat
           name={name}
           setName={setName}
         />
-        <Chat />
       </PubNubProvider>
   );
 }

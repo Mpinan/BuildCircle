@@ -13,6 +13,15 @@ code {
     monospace;
 }
 
+#sidebar {
+  min-width: 250px;
+  max-width: 250px;
+}
+
+#sidebar.active {
+  margin-left: -250px;
+}
+
 /* .pageStyles {
   align-items: center;
   background-color: #282c34;

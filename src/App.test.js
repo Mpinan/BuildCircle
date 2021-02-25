@@ -4,10 +4,10 @@ import App from './App';
 
 test('renders channels', () => {
   render(<App />);
-  const channelOne = screen.getByText(/channel-1/i);
-  const channelTwo = screen.getByText(/channel-2/i);
-  const channelThree = screen.getByText(/channel-3/i);
-  const channelFour = screen.getByText(/channel-4/i);
+  const channelOne = screen.getByText("channel-1");
+  const channelTwo = screen.getByText("channel-2");
+  const channelThree = screen.getByText("channel-3");
+  const channelFour = screen.getByText("channel-4");
   expect(channelOne).toBeInTheDocument();
   expect(channelTwo).toBeInTheDocument();
   expect(channelThree).toBeInTheDocument();
@@ -21,7 +21,7 @@ test('You can introduce name', () => {
 });
 
 
-test('You can introduce name', () => {
+test('You can introduce emoji', () => {
   render(<App />);
   const button = screen.getByText("Emojis");
   expect(button).toBeInTheDocument();

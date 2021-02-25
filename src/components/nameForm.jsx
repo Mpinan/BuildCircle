@@ -2,7 +2,7 @@ const NameForm = (props) => {
 	const {name, setName} = props
 
     return (         
-    	<div style={pageStyles}>
+    	<div>
         <form>
           <h1>
             Introduce a name
@@ -35,15 +35,6 @@ const inputStyles = {
 const buttonStyles = {
   fontSize: '1.1rem',
   padding: '10px 15px',
-};
-
-
-const pageStyles = {
-  alignItems: 'center',
-  background: '#282c34',
-  display: 'flex',
-  justifyContent: 'center',
-  minHeight: '10vh',
 };
  
 export default NameForm;

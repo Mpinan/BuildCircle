@@ -1,11 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { usePubNub } from 'pubnub-react';
 import ChatForm from "./chatForm"
+import NameForm from "./nameForm"
+import {
+  Collapse,
+  NavbarToggler,
+  NavbarBrand,
+  Nav,
+  NavItem,
+} from 'reactstrap';
 
-
-function Chat() {
+function Chat(props) {
+    const {name, setName} = props
     const pubnub = usePubNub();
-    const [channels] = useState(['channel-1', "channel-2", "channel-3", "channel-4"]);
+    const [channels] = useState(["channel-1", "channel-2", "channel-3", "channel-4"]);
     const [messages, addMessage] = useState({
       'channel-1': [], 
       'channel-2': [], 
@@ -15,8 +23,11 @@ function Chat() {
 
     const [message, setMessage] = useState('');
     const [channel, setChannel] = useState("channel-1")
+    const [isOpen, setIsOpen] = useState(false);
 
-  
+    const toggle = () => setIsOpen(!isOpen);
+
+
     const handleMessage = (event) => {
       const time = new Date().toLocaleTimeString();
       const publisher = <h4>{event.publisher}</h4>
@@ -48,21 +59,36 @@ function Chat() {
 
     return (
       <div style={pageStyles}>
-        <div style={chatStyles}>
-          <h1>You are in {channel}</h1>
-          <div style={channelStyle}>
-            {channels.map((cha, index) => {
-              return (
-                <div key={index}>
-                  <button 
-                    style={buttonStyles}
-                    onClick={handleChannel}>
-                    {cha}
-                  </button>
-                </div>
-              );
-            })}
-          </div>
+      <nav className="navbar navbar-expand-md navbar-dark bg-primary fixed-left">
+        <NavbarBrand href="/">Build Circle Chat</NavbarBrand>
+        <NavbarToggler onClick={toggle} />
+        <Collapse isOpen={isOpen} navbar>
+          <Nav className="mr-auto" navbar>
+            <NavItem>
+              <div style={channelStyle}>
+              {channels.map((cha, index) => {
+                return (
+                  <div style={buttonPadding} key={index}>
+                    <button 
+                      style={buttonStyles}
+                      onClick={handleChannel}>
+                      {cha}
+                    </button>
+                  </div>
+                );
+              })}
+              </div>
+            </NavItem>
+          </Nav>
+        </Collapse>
+        <NameForm
+          name={name}
+          setName={setName}
+        />
+      </nav>
+      <div >
+        <div>
+          <h1 style={{padding:"1rem", color:"#fff"}} >You are in {channel}</h1>
           <div style={listStyles}>
             {messages[channel].map((message, index) => {
               return (
@@ -81,22 +107,28 @@ function Chat() {
           </div>
         </div>
       </div>
+    </div>
     );
   }
+
   
   const buttonStyles = {
     fontSize: '1.1rem',
     padding: '10px 15px',
   };
 
+  const buttonPadding = {
+    padding: "0.5em"
+  }
+
   const channelStyle = { 
-    display: 'inline-flex'
+    display: 'flex',
+    padding: "0.5rem"
   }
 
   const pageStyles = {
     alignItems: 'center',
     background: '#282c34',
-    display: 'flex',
     justifyContent: 'center',
     minHeight: '100vh',
   };
@@ -104,8 +136,8 @@ function Chat() {
   const chatStyles = {
     display: 'flex',
     flexDirection: 'column',
-    height: '50vh',
-    width: '50%',
+    height: '60vh',
+    width: '100%',
   };
   
   const listStyles = {

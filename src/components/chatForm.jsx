@@ -19,7 +19,7 @@ const ChatForm = (props) => {
 	};
 
     return (     
-      <section>
+      <section style={chatStyles}>
         <div>
           {hidden ? <Picker onEmojiClick={onEmojiClick} /> : null }
         </div>
@@ -54,7 +54,12 @@ const ChatForm = (props) => {
     );
 }
 
-
+const chatStyles = {
+  display: 'flex',
+  flexDirection: 'column',
+  height: '60vh',
+  width: '100%',
+};
 const footerStyles = {
   display: 'flex',
 };
