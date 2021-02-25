@@ -2,13 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { usePubNub } from 'pubnub-react';
 import ChatForm from "./chatForm"
 import NameForm from "./nameForm"
-import {
-  Collapse,
-  NavbarToggler,
-  NavbarBrand,
-  Nav,
-  NavItem,
-} from 'reactstrap';
 
 function Chat(props) {
     const {name, setName} = props
@@ -23,10 +16,6 @@ function Chat(props) {
 
     const [message, setMessage] = useState('');
     const [channel, setChannel] = useState("channel-1")
-    const [isOpen, setIsOpen] = useState(false);
-
-    const toggle = () => setIsOpen(!isOpen);
-
 
     const handleMessage = (event) => {
       const time = new Date().toLocaleTimeString();
@@ -58,14 +47,15 @@ function Chat(props) {
     }
 
     return (
+      <div>
+
       <div style={pageStyles}>
-      <nav className="navbar navbar-expand-md navbar-dark bg-dark fixed-left">
-        <NavbarBrand href="/">Build Circle Chat</NavbarBrand>
-        <NavbarToggler onClick={toggle} />
-        <Collapse isOpen={isOpen} navbar>
-          <Nav className="mr-auto" navbar>
-            <NavItem>
+      <div style={sideBar}>
               <div style={channelStyle}>
+                <NameForm
+                  name={name}
+                  setName={setName}
+                  />
               {channels.map((cha, index) => {
                 return (
                   <div style={buttonPadding} key={index}>
@@ -78,18 +68,11 @@ function Chat(props) {
                 );
               })}
               </div>
-            </NavItem>
-          </Nav>
-        </Collapse>
-        <NameForm
-          name={name}
-          setName={setName}
-        />
-      </nav>
-      <div >
-        <div>
-          <h1 style={{padding:"1rem", color:"#fff"}} >You are in {channel}</h1>
+      </div>
+      <div>
+        <div style={{padding:"5%"}}>
           <div style={listStyles}>
+          <h1 style={{padding:"1rem", color:"black"}} >You are in {channel}</h1>
             {messages[channel].map((message, index) => {
               return (
                 <div key={`message-${index}`}>
@@ -97,57 +80,62 @@ function Chat(props) {
                 </div>
               );
             })}
-          </div>
-          <div>
+          <div >
             <ChatForm
               message={message}
               setMessageForm={setMessage}
               sendMessage={sendMessage}
               />
           </div>
+          </div>
         </div>
       </div>
     </div>
+  </div>
     );
   }
 
-  
+  const sideBar = {
+    position: "absolute",
+    height: "100%",
+    width: "15%",
+    backgroundColor: "#dc8135",
+  }
+
   const buttonStyles = {
+    backgroundColor: "#4f5165",
+    borderRadius: "10px",
     fontSize: '1.1rem',
     padding: '10px 15px',
   };
 
   const buttonPadding = {
+    overflowX: "hidden",
+    overflowY: "auto",
     padding: "0.5em"
   }
 
   const channelStyle = { 
-    display: 'flex',
+    display: 'block',
     padding: "0.5rem"
   }
 
   const pageStyles = {
     alignItems: 'center',
-    background: '#282c34',
+    background: '#343a40',
     justifyContent: 'center',
     minHeight: '100vh',
   };
-  
-  const chatStyles = {
-    display: 'flex',
-    flexDirection: 'column',
-    height: '60vh',
-    width: '100%',
-  };
-  
+    
   const listStyles = {
-    alignItems: 'flex-start',
-    backgroundColor: 'white',
-    display: 'flex',
-    flexDirection: 'column',
-    flexGrow: 1,
-    overflow: 'auto',
-    padding: '100px',
+    backgroundColor: '#ffffff',
+    height: "80%",
+    width: "80%",
+    left: "17%",
+    top: "auto",
+    position: "absolute",
+    overflowX: "hidden",
+    overflowY: "auto"
   };
 
   export default Chat

@@ -55,11 +55,13 @@ const ChatForm = (props) => {
 }
 
 const chatStyles = {
-  display: 'flex',
+  position: "absolute",
+  display: 'inline-block',
   flexDirection: 'column',
-  height: '60vh',
   width: '100%',
+  bottom: "0"
 };
+
 const footerStyles = {
   display: 'flex',
 };
