@@ -59,7 +59,7 @@ function Chat(props) {
 
     return (
       <div style={pageStyles}>
-      <nav className="navbar navbar-expand-md navbar-dark bg-primary fixed-left">
+      <nav className="navbar navbar-expand-md navbar-dark bg-dark fixed-left">
         <NavbarBrand href="/">Build Circle Chat</NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
@@ -147,7 +147,7 @@ function Chat(props) {
     flexDirection: 'column',
     flexGrow: 1,
     overflow: 'auto',
-    padding: '10px',
+    padding: '100px',
   };
 
   export default Chat

@@ -4,7 +4,7 @@ const NameForm = (props) => {
     return (         
     	<div>
         <form>
-          <h1>
+          <h1 style={{padding:"1rem", color:"#fff"}}>
             Introduce a name
           </h1>
           <input
