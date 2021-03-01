@@ -1,31 +1,35 @@
 .chatForm {
-    border: 5px solid rgb(175, 71, 154);
+    border-top: 1px solid black;
     width: 85%;
     position: absolute;
     bottom: 0;
-}
-
-.chatBox{
-    border: 5px solid rgb(9, 49, 102);
+    padding: 10px;
 }
 
 .emojiButton {
     float: left;
-    border: 5px solid rgb(75, 70, 74);
-    width: 8%;
+    width: 4%;
+    cursor: pointer;
+    padding-left: 3px;
+    padding-right: 3px;
+}
+
+.emoji-icon {
+    justify-content: center;
+    align-items: center
 }
 
 .inputField {
-    border: 5px solid rgb(18, 143, 18);
-    width: 80%;
+    width: 91%;
+    background-color: #4f535b;
+}
+
+::placeholder {
+    color: #d3cfcf;
 }
 
 .sendButton {
+    cursor: pointer;
     float: right;
-    border: 5px solid rgb(75, 70, 74);
-    width: 12%;
+    width: 4%;
 }
-
-/* .emojiBox {
-
-} */

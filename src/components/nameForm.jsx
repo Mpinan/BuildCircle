@@ -1,28 +1,38 @@
-const NameForm = (props) => {
-	const {name, setName} = props
+import "./styles/nameForm.css"
 
-    return (         
-    	<div>
-        <form>
-          <h4>
-            Introduce a name
+
+const NameForm = (props) => {
+  const { name, setName } = props
+
+  return (
+    <div className="nameForm">
+      <form>
+        <h4
+          className="inputTitle"
+        >
+          Introduce a name
           </h4>
-          <input
-            type="text"
-            value={name}
-            onChange={e =>  {
-              e.preventDefault();
-              setName(e.target.value)
-            }}
-            />
-          <button 
+        <input
+          className="inputField"
+          type="text"
+          value={name}
+          onChange={e => {
+            e.preventDefault();
+            setName(e.target.value)
+          }}
+        />
+        <div className="paddingButton">
+
+          <button
+            className="inputButton"
             type="submit">
             Submit name
           </button>
-        </form>
-      </div> 
-    );
+        </div>
+      </form>
+    </div>
+  );
 }
 
- 
+
 export default NameForm;

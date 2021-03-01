@@ -1,5 +1,7 @@
 import Picker from 'emoji-picker-react';
 import React, { useState, useRef } from 'react';
+import { FaSmileBeam } from "react-icons/fa"
+import { RiSendPlaneFill } from "react-icons/ri"
 import "./styles/chatForm.css"
 
 
@@ -25,11 +27,16 @@ const ChatForm = (props) => {
         {hidden ? <Picker onEmojiClick={onEmojiClick} /> : null}
       </div>
       <div className="chatBox">
-        <button
+        <div
           className="emojiButton"
-          onClick={showEmojis}>
-          Emojis
-          </button>
+        >
+          <FaSmileBeam
+            style={{ justiftyContent: "center", alignItems: "center" }}
+            size={30}
+            color="white"
+            onClick={showEmojis}
+          />
+        </div>
         <input
           className="inputField"
           ref={ref}
@@ -43,15 +50,19 @@ const ChatForm = (props) => {
           }}
           onChange={e => setMessageForm(e.target.value)}
         />
-        <button
+        <div
           className="sendButton"
-          onClick={e => {
-            e.preventDefault();
-            sendMessage(message);
-          }}
         >
-          Send Message
-          </button>
+          <RiSendPlaneFill
+            size={30}
+            color="white"
+            style={{ justiftyContent: "center", alignItems: "center" }}
+            onClick={e => {
+              e.preventDefault();
+              sendMessage(message);
+            }}
+          />
+        </div>
       </div>
     </div>
   );

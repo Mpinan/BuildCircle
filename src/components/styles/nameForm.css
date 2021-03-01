@@ -1,0 +1,23 @@
+.nameForm {
+    text-align: center;
+    padding-top: 10%;
+    padding-bottom: 100%;
+}
+
+.inputTitle {
+    color: #d3cfcf
+}
+
+.inputField {
+    background-color: #4f535b;
+}
+
+.paddingButton {
+    padding: 5px;
+}
+
+.inputButton {
+    background-color: #d3cfcf;
+    border-radius: .25rem;
+    color: #4f535b;
+}

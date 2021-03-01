@@ -19,9 +19,12 @@ function Chat(props) {
   const [channel, setChannel] = useState("General")
 
   const handleMessage = (event) => {
-    const time = new Date().toLocaleTimeString();
-    const publisher = <h4>{event.publisher}</h4>
-    const message = event.message + " " + time;
+    const time = new Date().toLocaleTimeString()
+    const publisher = <ul className="messagePublisher">
+      <li>{event.publisher}</li>
+      <li className="listTime">{time}</li>
+    </ul>
+    const message = event.message
     if (typeof message === 'string' || message.hasOwnProperty('text')) {
       const text = message.text || message;
       if (event.channel) {
@@ -60,46 +63,45 @@ function Chat(props) {
   return (
     <div className="pageContainer">
       <div className="sideBar">
-        <div className="channelStyle">
-          <NameForm
-            name={name}
-            setName={setName}
-          />
-          <div>
-            {channels.map((cha, index) => {
-              return (
-                <div key={index}>
-                  <ul>
-                    <li                         
-                        onClick={handleChannel}>
-                        {cha}
-                    </li>
-                  </ul>
-                </div>
-              );
-            })}
-          </div>
+        <NameForm
+          name={name}
+          setName={setName}
+        />
+        <div>
+          {channels.map((cha, index) => {
+            return (
+              <div key={index}>
+                <ul>
+                  <li
+                    onClick={handleChannel}>
+                    {cha}
+                  </li>
+                </ul>
+              </div>
+            );
+          })}
         </div>
       </div>
       <div className="pageStyles">
+        <div className="messageTitle">
+          <h1>You are in {channel} channel.</h1>
+          <h3>{currentDate()}</h3>
+        </div>
         <div className="messageBox">
-          <div style={{padding: "1rem", backgroundColor: "#60656f", borderBottom: "1px solid black"}}>
-            <h1>You are in {channel} channel.</h1>
-            <h3>{currentDate()}</h3>
-          </div>
           {messages[channel].map((message, index) => {
             return (
-              <div key={`message-${index}`}>
+              <div className="message" key={`message-${index}`}>
+                {/* <h4>{new Date().toLocaleTimeString()}</h4> */}
                 {message}
               </div>
             );
           })}
-            <ChatForm
-              message={message}
-              setMessageForm={setMessage}
-              sendMessage={sendMessage}
-            />
         </div>
+        <ChatForm
+          message={message}
+          setMessageForm={setMessage}
+          sendMessage={sendMessage}
+        />
       </div>
     </div>
   );
