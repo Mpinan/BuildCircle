@@ -1,9 +1,10 @@
 import Picker from 'emoji-picker-react';
 import React, { useState, useRef } from 'react';
+import "./styles/chatForm.css"
 
 
 const ChatForm = (props) => {
-	const { message, sendMessage, setMessageForm } = props
+  const { message, sendMessage, setMessageForm } = props
   const [hidden, setHidden] = useState(false)
   const ref = useRef(null);
 
@@ -12,70 +13,50 @@ const ChatForm = (props) => {
   }
 
 
-	const onEmojiClick = (e, emojiObject) => {
+  const onEmojiClick = (e, emojiObject) => {
     const cursor = ref.current.selectionStart;
     const text = message.slice(0, cursor) + emojiObject.emoji + message.slice(cursor);
     setMessageForm(text);
-	};
+  };
 
-    return (     
-      <section style={chatStyles}>
-        <div>
-          {hidden ? <Picker onEmojiClick={onEmojiClick} /> : null }
-        </div>
-        <div style={footerStyles}>
-          <button onClick={showEmojis}>
-            Emojis
+  return (
+    <div className="chatForm">
+      <div className="emojiBox">
+        {hidden ? <Picker onEmojiClick={onEmojiClick} /> : null}
+      </div>
+      <div className="chatBox">
+        <button
+          className="emojiButton"
+          onClick={showEmojis}>
+          Emojis
           </button>
-          <input
-              ref={ref}
-							id="text"
-							style={inputStyles}
-              type="text"
-              placeholder="Type your message"
-              value={message}
-              onKeyPress={e => {
-                if (e.key !== 'Enter') return;
-                sendMessage(message);
-              }}
-              onChange={e => setMessageForm(e.target.value)}
-              />
-          <button
-							style={buttonStyles}
-              onClick={e => {
-                e.preventDefault();
-                sendMessage(message);
-              }}
-              >
-            Send Message
-          </button> 
-        </div>      
-      </section>  
-    );
+        <input
+          className="inputField"
+          ref={ref}
+          id="text"
+          type="text"
+          placeholder="Send message"
+          value={message}
+          onKeyPress={e => {
+            if (e.key !== 'Enter') return;
+            sendMessage(message);
+          }}
+          onChange={e => setMessageForm(e.target.value)}
+        />
+        <button
+          className="sendButton"
+          onClick={e => {
+            e.preventDefault();
+            sendMessage(message);
+          }}
+        >
+          Send Message
+          </button>
+      </div>
+    </div>
+  );
 }
 
-const chatStyles = {
-  position: "absolute",
-  display: 'inline-block',
-  flexDirection: 'column',
-  width: '100%',
-  bottom: "0"
-};
-
-const footerStyles = {
-  display: 'flex',
-};
-
-const inputStyles = {
-	flexGrow: 1,
-	fontSize: '1.1rem',
-	padding: '10px 15px',
-};
-
-const buttonStyles = {
-  fontSize: '1.1rem',
-  padding: '10px 15px',
-};
 
 
 

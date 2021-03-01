@@ -1,0 +1,31 @@
+.chatForm {
+    border: 5px solid rgb(175, 71, 154);
+    width: 85%;
+    position: absolute;
+    bottom: 0;
+}
+
+.chatBox{
+    border: 5px solid rgb(9, 49, 102);
+}
+
+.emojiButton {
+    float: left;
+    border: 5px solid rgb(75, 70, 74);
+    width: 8%;
+}
+
+.inputField {
+    border: 5px solid rgb(18, 143, 18);
+    width: 80%;
+}
+
+.sendButton {
+    float: right;
+    border: 5px solid rgb(75, 70, 74);
+    width: 12%;
+}
+
+.emojiBox {
+
+}

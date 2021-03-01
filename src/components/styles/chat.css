@@ -1,0 +1,61 @@
+.pageContainer {
+  position: relative;
+	margin: auto;
+	display: flex;
+  background: #36393f;
+  border: 5px solid rgb(0, 0, 0);
+}
+
+/* Side bar */
+
+.sideBar {
+  overflow-x: hidden;
+  overflow-y: auto;
+  box-sizing: border-box;
+  position: relative;
+  height: 100vh;
+  width: 15%;
+  background-color: #2f3136;
+  border: 5px solid red;
+}
+
+.sideBar a {
+  border: 5px solid rgb(65, 133, 118);
+	letter-spacing: 4px;
+	font-size: 20px;
+	color: #8e9297!important;
+  cursor: pointer;
+}
+
+.sideBar ul li {
+  display: none;
+}
+
+.sideBar ul li:hover {
+	transition: all 0.7s ease 0s;
+	background: #6a6e72;
+}
+
+.sideBar ul li a:hover {
+	transition: all 0.5s ease 0s;
+	color: #6a6e72
+}
+
+.channelStyle {
+  border: 5px solid rgb(25, 0, 255);
+  display: block;
+}
+
+/* Right box, chat box */
+
+.pageStyles {
+  box-sizing: border-box;
+  width: 85%;
+  min-height: 100vh
+}
+
+.messageBox {
+  height: 100vh;
+}; 
+
+
