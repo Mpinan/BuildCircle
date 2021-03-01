@@ -70,11 +70,9 @@ function Chat(props) {
               return (
                 <div key={index}>
                   <ul>
-                    <li>
-                      <a
+                    <li                         
                         onClick={handleChannel}>
                         {cha}
-                      </a>
                     </li>
                   </ul>
                 </div>
